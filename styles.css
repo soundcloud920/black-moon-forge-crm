@@ -15,19 +15,19 @@
 }
 
 :root {
-  --black: #030302;
-  --coal: #070604;
-  --plate: #15100b;
-  --field: #050504;
-  --bone: #d8c8a9;
-  --muted: #81735d;
-  --bronze: #6f4a2b;
-  --bronze-hi: #9a6a3a;
-  --blood: #8e1518;
-  --blood-hi: #c22a2d;
-  --line: rgba(154, 106, 58, 0.34);
-  --line-strong: rgba(154, 106, 58, 0.62);
-  --shadow: 0 22px 80px rgba(0, 0, 0, 0.66);
+  --bg: #050505;
+  --bg-soft: #0b0b0a;
+  --surface: #111110;
+  --surface-strong: #171715;
+  --field: #070707;
+  --text: #f0ece3;
+  --heading: #fffaf0;
+  --muted: #98928a;
+  --line: rgba(240, 236, 227, 0.15);
+  --line-strong: rgba(240, 236, 227, 0.25);
+  --accent: #c8bda8;
+  --danger: #8c2525;
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.5);
   color-scheme: dark;
 }
 
@@ -37,18 +37,15 @@
 
 html {
   min-height: 100%;
-  background: var(--black);
+  background: var(--bg);
 }
 
 body {
   margin: 0;
   min-height: 100vh;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
   font-family: "LLG Relicus", "Segoe UI", Arial, sans-serif;
-  color: var(--bone);
-  background:
-    radial-gradient(circle at 60% 12%, rgba(142, 21, 24, 0.13), transparent 34%),
-    linear-gradient(115deg, rgba(111, 74, 43, 0.09), transparent 38%),
-    linear-gradient(180deg, #030302 0%, #070604 52%, #030302 100%);
 }
 
 body::before {
@@ -57,10 +54,10 @@ body::before {
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(90deg, transparent 0 49.8%, rgba(154, 106, 58, 0.045) 50%, transparent 50.2%),
-    linear-gradient(0deg, transparent 0 49.8%, rgba(154, 106, 58, 0.03) 50%, transparent 50.2%);
-  background-size: 92px 92px;
-  mask-image: radial-gradient(circle at 50% 25%, black, transparent 78%);
+    linear-gradient(90deg, transparent 0 49.9%, rgba(128, 122, 112, 0.035) 50%, transparent 50.1%),
+    linear-gradient(0deg, transparent 0 49.9%, rgba(128, 122, 112, 0.025) 50%, transparent 50.1%);
+  background-size: 96px 96px;
+  opacity: 0.55;
 }
 
 button,
@@ -74,117 +71,81 @@ button {
 
 .login-screen {
   position: relative;
+  z-index: 1;
   display: grid;
   min-height: 100vh;
   place-items: center;
-  padding: 22px;
+  padding: 24px;
 }
 
 .login-panel {
-  position: relative;
-  z-index: 1;
-  width: min(430px, 100%);
-  padding: 26px;
-  border: 1px solid var(--line-strong);
-  border-radius: 7px;
-  background:
-    linear-gradient(180deg, rgba(21, 16, 11, 0.96), rgba(5, 5, 4, 0.97)),
-    var(--plate);
+  width: min(440px, 100%);
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--surface) 94%, transparent);
   box-shadow: var(--shadow);
-  animation: liftIn 260ms ease-out both;
-}
-
-.login-panel::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 3px;
-  background: linear-gradient(var(--blood-hi), var(--bronze-hi));
+  animation: liftIn 220ms ease-out both;
 }
 
 .brand {
   display: flex;
-  gap: 13px;
   align-items: center;
+  gap: 16px;
 }
 
 .brand-login {
-  margin-bottom: 28px;
+  margin-bottom: 30px;
 }
 
-.brand-mark {
-  position: relative;
-  width: 48px;
-  height: 48px;
+.brand-logo {
+  width: 76px;
+  height: 76px;
+  flex: 0 0 auto;
   border: 1px solid var(--line-strong);
-  border-radius: 6px;
-  background: linear-gradient(135deg, rgba(111, 74, 43, 0.74), rgba(7, 6, 4, 0.96));
-  box-shadow: inset 0 0 0 1px rgba(216, 200, 169, 0.07);
-}
-
-.brand-mark::before,
-.brand-mark::after,
-.brand-mark span {
-  content: "";
-  position: absolute;
-  left: 13px;
-  right: 13px;
-  height: 3px;
-  background: var(--bone);
-}
-
-.brand-mark::before {
-  top: 14px;
-  transform: rotate(62deg);
-}
-
-.brand-mark::after {
-  top: 14px;
-  transform: rotate(-62deg);
-}
-
-.brand-mark span {
-  bottom: 12px;
-  background: var(--blood-hi);
-  box-shadow: 0 0 14px rgba(194, 42, 45, 0.56);
+  border-radius: 8px;
+  object-fit: cover;
+  background: #050505;
+  box-shadow: var(--shadow);
 }
 
 .brand-kicker,
 .eyebrow {
   margin: 0;
-  color: var(--bronze-hi);
-  font-size: 11px;
+  color: var(--muted);
+  font-size: 12px;
   font-weight: 700;
-  line-height: 1;
+  line-height: 1.1;
   text-transform: uppercase;
 }
 
 .brand h1,
 .login-copy h2 {
   margin: 0;
+  color: var(--heading);
   letter-spacing: 0;
 }
 
 .brand h1 {
-  margin-top: 4px;
-  font-size: 28px;
-  line-height: 0.95;
+  margin-top: 5px;
+  font-size: 30px;
+  line-height: 1;
 }
 
 .login-copy {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
 .login-copy h2 {
-  margin-top: 7px;
-  font-size: 46px;
-  line-height: 0.92;
+  margin-top: 8px;
+  font-size: 40px;
+  line-height: 1;
 }
 
 .login-panel label {
   display: grid;
-  gap: 7px;
-  margin-bottom: 14px;
+  gap: 8px;
+  margin-bottom: 15px;
   color: var(--muted);
   font-size: 13px;
   font-weight: 700;
@@ -193,49 +154,48 @@ button {
 input {
   width: 100%;
   min-width: 0;
-  height: 42px;
+  height: 44px;
   border: 1px solid var(--line);
-  border-radius: 5px;
-  padding: 9px 10px;
-  color: var(--bone);
+  border-radius: 6px;
+  padding: 10px 12px;
+  color: var(--text);
   background: var(--field);
-  caret-color: var(--blood-hi);
 }
 
 input:focus,
 button:focus-visible {
-  outline: 2px solid var(--blood-hi);
+  outline: 2px solid var(--accent);
   outline-offset: 2px;
 }
 
 input[type="checkbox"] {
   width: 17px;
   height: 17px;
-  accent-color: var(--blood);
+  accent-color: var(--accent);
 }
 
 .remember-row {
   display: flex !important;
   align-items: center;
   gap: 10px;
-  margin: 4px 0 12px;
+  margin: 3px 0 12px;
 }
 
 .login-error {
   min-height: 20px;
   margin: 0 0 10px;
-  color: #f07570;
+  color: #d66d6d;
   font-size: 13px;
 }
 
 .primary-button {
-  min-height: 40px;
-  border: 1px solid rgba(216, 200, 169, 0.11);
+  min-height: 42px;
+  border: 1px solid var(--heading);
   border-radius: 6px;
-  padding: 9px 13px;
-  color: var(--bone);
+  padding: 9px 15px;
+  color: var(--bg);
   font-weight: 700;
-  background: linear-gradient(135deg, var(--bronze), #8a5732);
+  background: var(--heading);
   transition:
     transform 150ms ease,
     border-color 150ms ease;
@@ -249,7 +209,7 @@ input[type="checkbox"] {
 @keyframes liftIn {
   from {
     opacity: 0;
-    transform: translateY(10px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -268,11 +228,24 @@ input[type="checkbox"] {
 }
 
 @media (max-width: 520px) {
+  .login-screen {
+    padding: 16px;
+  }
+
   .login-panel {
-    padding: 18px;
+    padding: 20px;
+  }
+
+  .brand-logo {
+    width: 64px;
+    height: 64px;
+  }
+
+  .brand h1 {
+    font-size: 26px;
   }
 
   .login-copy h2 {
-    font-size: 38px;
+    font-size: 34px;
   }
 }

@@ -24,7 +24,7 @@ unlockForm.addEventListener("submit", async (event) => {
     }
 
     const session = makeSession(result.accountId);
-    const unlocked = { accountId: result.accountId, payload: result.payload, session };
+    const unlocked = { accountId: result.accountId, payload: result.payload, session, payloadBuild: currentPayloadBuild() };
     const storage = remember ? localStorage : sessionStorage;
     storage.setItem(SECURE_UNLOCK_KEY, JSON.stringify(unlocked));
     mountApp(unlocked);
@@ -44,7 +44,13 @@ function readUnlock() {
   const raw = localStorage.getItem(SECURE_UNLOCK_KEY) || sessionStorage.getItem(SECURE_UNLOCK_KEY);
   if (!raw) return null;
   try {
-    return JSON.parse(raw);
+    const saved = JSON.parse(raw);
+    if (saved.payloadBuild !== currentPayloadBuild()) {
+      localStorage.removeItem(SECURE_UNLOCK_KEY);
+      sessionStorage.removeItem(SECURE_UNLOCK_KEY);
+      return null;
+    }
+    return saved;
   } catch {
     return null;
   }
@@ -52,15 +58,14 @@ function readUnlock() {
 
 async function unlockPayload(login, password) {
   const envelopes = window.BMF_SECURE_PAYLOAD?.envelopes || [];
-  const candidates = envelopes.filter((envelope) => envelope.aliases.map(normalizeLogin).includes(login));
 
-  for (const envelope of candidates) {
+  for (const envelope of envelopes) {
     try {
-      const key = await deriveKey(password, envelope);
+      const key = await deriveKey(login, password, envelope);
       const payloadText = await decryptEnvelope(key, envelope);
       const payload = JSON.parse(payloadText);
       if (payload?.version === 1 && payload.html && payload.css && payload.js) {
-        return { accountId: envelope.id, payload };
+        return { accountId: envelope.id || "member", payload };
       }
     } catch {
       continue;
@@ -70,10 +75,10 @@ async function unlockPayload(login, password) {
   return null;
 }
 
-async function deriveKey(password, envelope) {
+async function deriveKey(login, password, envelope) {
   const baseKey = await crypto.subtle.importKey(
     "raw",
-    new TextEncoder().encode(password),
+    new TextEncoder().encode(`${login}\n${password}`),
     "PBKDF2",
     false,
     ["deriveKey"],
@@ -142,4 +147,8 @@ function base64ToBytes(value) {
 
 function normalizeLogin(value) {
   return String(value || "").trim().toLowerCase();
+}
+
+function currentPayloadBuild() {
+  return String(window.BMF_SECURE_PAYLOAD?.buildId || "");
 }
