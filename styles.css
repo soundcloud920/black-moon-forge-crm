@@ -1,0 +1,309 @@
+@font-face {
+  font-family: "LLG Relicus";
+  src: url("assets/fonts/LLG_Relicus-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "LLG Relicus";
+  src: url("assets/fonts/LLG_Relicus-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --void: #070606;
+  --panel: #18130f;
+  --panel-strong: #211812;
+  --field: #0c0c0b;
+  --bone: #eadfc9;
+  --smoke: #9d907e;
+  --bronze: #9a6a3a;
+  --copper: #b87343;
+  --dry-copper: #65422d;
+  --rune: #b71f22;
+  --blood: #e0312d;
+  --line: rgba(196, 139, 82, 0.26);
+  --line-strong: rgba(196, 139, 82, 0.55);
+  --shadow: 0 22px 70px rgba(0, 0, 0, 0.45);
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--void);
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "LLG Relicus", "Segoe UI", Arial, sans-serif;
+  color: var(--bone);
+  background:
+    linear-gradient(90deg, rgba(184, 115, 67, 0.06) 1px, transparent 1px),
+    linear-gradient(0deg, rgba(184, 115, 67, 0.04) 1px, transparent 1px),
+    linear-gradient(135deg, #070606 0%, #0e0b09 45%, #130d0b 100%);
+  background-size: 54px 54px, 54px 54px, auto;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(120deg, transparent 0 42%, rgba(183, 31, 34, 0.08) 42.2%, transparent 43%),
+    linear-gradient(60deg, transparent 0 58%, rgba(154, 106, 58, 0.07) 58.2%, transparent 59%);
+  opacity: 0.65;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.login-screen {
+  position: relative;
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 22px;
+  overflow: hidden;
+}
+
+.login-runes {
+  position: absolute;
+  inset: auto 6vw 7vh auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+  color: rgba(224, 49, 45, 0.2);
+  font-size: clamp(52px, 11vw, 140px);
+  line-height: 1;
+  transform: rotate(-8deg);
+  animation: runeDrift 9000ms ease-in-out infinite alternate;
+}
+
+.login-panel {
+  position: relative;
+  z-index: 1;
+  width: min(480px, 100%);
+  padding: 28px;
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  background:
+    linear-gradient(180deg, rgba(33, 24, 18, 0.96), rgba(12, 10, 9, 0.96)),
+    var(--panel);
+  box-shadow: var(--shadow);
+  animation: liftIn 360ms ease-out both;
+}
+
+.brand {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.brand-login {
+  margin-bottom: 30px;
+}
+
+.brand-mark {
+  position: relative;
+  width: 52px;
+  height: 52px;
+  border: 1px solid var(--line-strong);
+  border-radius: 7px;
+  background:
+    linear-gradient(135deg, rgba(154, 106, 58, 0.82), rgba(52, 25, 18, 0.9)),
+    var(--panel-strong);
+  box-shadow: inset 0 0 0 1px rgba(234, 223, 201, 0.08);
+}
+
+.brand-mark::before,
+.brand-mark::after,
+.brand-mark span {
+  content: "";
+  position: absolute;
+  left: 13px;
+  right: 13px;
+  height: 3px;
+  background: var(--bone);
+  box-shadow: 0 0 14px rgba(224, 49, 45, 0.25);
+}
+
+.brand-mark::before {
+  top: 14px;
+  transform: rotate(62deg);
+}
+
+.brand-mark::after {
+  top: 14px;
+  transform: rotate(-62deg);
+}
+
+.brand-mark span {
+  bottom: 13px;
+  background: var(--blood);
+  animation: emberPulse 2200ms ease-in-out infinite;
+}
+
+.brand-kicker,
+.eyebrow {
+  margin: 0;
+  color: var(--copper);
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.brand h1,
+.login-copy h2 {
+  margin: 0;
+  letter-spacing: 0;
+}
+
+.brand h1 {
+  margin-top: 5px;
+  color: var(--bone);
+  font-size: 30px;
+  line-height: 0.95;
+}
+
+.login-copy {
+  margin-bottom: 22px;
+}
+
+.login-copy h2 {
+  margin-top: 8px;
+  max-width: 360px;
+  font-size: clamp(34px, 7vw, 58px);
+  line-height: 0.95;
+}
+
+.login-panel label {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 14px;
+  color: var(--smoke);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+input {
+  width: 100%;
+  min-width: 0;
+  height: 42px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 9px 11px;
+  color: var(--bone);
+  background: var(--field);
+  caret-color: var(--blood);
+}
+
+input:focus,
+button:focus-visible {
+  outline: 2px solid var(--blood);
+  outline-offset: 2px;
+}
+
+input[type="checkbox"] {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--rune);
+}
+
+.remember-row {
+  display: flex !important;
+  align-items: center;
+  gap: 10px;
+  margin: 4px 0 12px;
+}
+
+.login-error {
+  min-height: 20px;
+  margin: 0 0 10px;
+  color: #ff6a60;
+  font-size: 13px;
+}
+
+.primary-button {
+  min-height: 40px;
+  border: 1px solid rgba(234, 223, 201, 0.12);
+  border-radius: 6px;
+  padding: 9px 13px;
+  color: var(--bone);
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(135deg, var(--dry-copper), var(--copper));
+  transition:
+    transform 150ms ease,
+    border-color 150ms ease;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px);
+  border-color: var(--line-strong);
+}
+
+@keyframes emberPulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    box-shadow: 0 0 8px rgba(224, 49, 45, 0.25);
+  }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 18px rgba(224, 49, 45, 0.72);
+  }
+}
+
+@keyframes liftIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes runeDrift {
+  from {
+    transform: rotate(-8deg) translateY(0);
+  }
+  to {
+    transform: rotate(-8deg) translateY(-12px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (max-width: 720px) {
+  .login-panel {
+    padding: 16px;
+  }
+}

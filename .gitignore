@@ -1,0 +1,9 @@
+.codex-work/
+.playwright-cli/
+.secrets/
+node_modules/
+output/
+outputs/
+tmp/
+.DS_Store
+Thumbs.db
