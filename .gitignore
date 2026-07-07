@@ -2,6 +2,8 @@
 .playwright-cli/
 .secrets/
 node_modules/
+activity-bot-server/.env
+activity-bot-server/data/
 output/
 outputs/
 tmp/
