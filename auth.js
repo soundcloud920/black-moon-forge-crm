@@ -23,7 +23,7 @@ unlockForm.addEventListener("submit", async (event) => {
       return;
     }
 
-    const session = makeSession(result.accountId);
+    const session = makeSession(result.accountId, login);
     const unlocked = { accountId: result.accountId, payload: result.payload, session, payloadBuild: currentPayloadBuild() };
     const storage = remember ? localStorage : sessionStorage;
     storage.setItem(SECURE_UNLOCK_KEY, JSON.stringify(unlocked));
@@ -124,9 +124,10 @@ function mountApp(unlocked) {
   new Function(unlocked.payload.js)();
 }
 
-function makeSession(userId) {
+function makeSession(userId, login) {
   return {
     userId,
+    login,
     deviceId: getDeviceId(),
     signedAt: new Date().toISOString(),
   };
