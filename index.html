@@ -4,17 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Moon Forge Studio CRM</title>
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23070606'/%3E%3Cpath d='M15 47h34M20 39l12-24 12 24M25 31h14' stroke='%23a97142' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M48 14l-8 8 8 8' stroke='%23b71f22' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%23030302'/%3E%3Cpath d='M16 46h32M22 38l10-22 10 22M26 31h12' stroke='%239a6a3a' stroke-width='5' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M48 14l-8 8 8 8' stroke='%238e1518' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <section id="unlockScreen" class="login-screen">
-      <div class="login-runes" aria-hidden="true">
-        <span>ᛒ</span>
-        <span>ᛗ</span>
-        <span>ᚠ</span>
-      </div>
-
+    <main id="unlockScreen" class="login-screen">
       <form id="unlockForm" class="login-panel">
         <div class="brand brand-login">
           <div class="brand-mark" aria-hidden="true"><span></span></div>
@@ -26,7 +20,7 @@
 
         <div class="login-copy">
           <p class="eyebrow">Закрытый вход</p>
-          <h2>Общак, подрядчики и платежи</h2>
+          <h2>Войти</h2>
         </div>
 
         <label>
@@ -46,7 +40,7 @@
         <p id="unlockError" class="login-error" role="alert" aria-live="polite"></p>
         <button class="primary-button" type="submit">Войти</button>
       </form>
-    </section>
+    </main>
 
     <script src="secure-payload.js"></script>
     <script src="auth.js"></script>
