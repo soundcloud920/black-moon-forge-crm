@@ -15,6 +15,9 @@ unlockForm.addEventListener("submit", async (event) => {
   const login = normalizeLogin(form.get("login"));
   const password = String(form.get("password") || "");
   const remember = Boolean(form.get("remember"));
+  const submitButton = unlockForm.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Входим…";
 
   try {
     const result = await unlockPayload(login, password);
@@ -30,6 +33,9 @@ unlockForm.addEventListener("submit", async (event) => {
     mountApp(unlocked);
   } catch {
     unlockError.textContent = "Не удалось открыть CRM.";
+  } finally {
+    submitButton.disabled = false;
+    submitButton.textContent = "Войти";
   }
 });
 
@@ -117,11 +123,15 @@ function mountApp(unlocked) {
   window.BMF_SESSION = unlocked.session;
 
   const style = document.createElement("style");
-  style.textContent = unlocked.payload.css;
+  style.textContent = window.BMF_REDESIGN ? "" : unlocked.payload.css;
   document.head.append(style);
 
-  document.body.innerHTML = unlocked.payload.html;
+  document.body.innerHTML = window.BMF_REDESIGN?.html || unlocked.payload.html;
+  if (window.BMF_REDESIGN && !localStorage.getItem("bmf-crm-theme-v1")) {
+    localStorage.setItem("bmf-crm-theme-v1", "light");
+  }
   new Function(unlocked.payload.js)();
+  window.BMF_SETUP_INTERFACE?.();
 }
 
 function makeSession(userId, login) {

@@ -4,32 +4,30 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Black Moon Forge Studio CRM</title>
-    <link rel="icon" href="assets/brand/black-forge-moon-logo.png" />
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <main id="unlockScreen" class="login-screen">
       <form id="unlockForm" class="login-panel">
         <div class="brand brand-login">
-          <img class="brand-logo" src="assets/brand/black-forge-moon-logo.png" alt="Black Forge Moon Studio" />
           <div>
-            <p class="brand-kicker">Black Moon Forge Studio</p>
+            <p class="brand-kicker">Рабочее пространство студии</p>
             <h1>Forge CRM</h1>
           </div>
         </div>
 
         <div class="login-copy">
-          <p class="eyebrow">Закрытый вход</p>
-          <h2>Войти</h2>
+          <p class="eyebrow">Рабочее пространство</p>
+          <h2>Добро пожаловать</h2><p class="login-description">Войдите, чтобы продолжить работу с финансами студии.</p>
         </div>
 
         <label>
           Логин
-          <input name="login" type="text" autocomplete="username" required />
+          <input name="login" type="text" autocomplete="username" placeholder="Ваш логин" autocapitalize="none" spellcheck="false" required />
         </label>
         <label>
           Пароль
-          <input name="password" type="password" autocomplete="current-password" required />
+          <input name="password" type="password" autocomplete="current-password" placeholder="Введите пароль" required />
         </label>
 
         <label class="remember-row">
@@ -44,6 +42,8 @@
 
     <script src="sync-config.js"></script>
     <script src="secure-payload.js"></script>
+    <script src="redesign.js"></script>
+    <script src="interface.js"></script>
     <script src="auth.js"></script>
   </body>
 </html>
