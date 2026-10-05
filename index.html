@@ -1,49 +1,36 @@
 <!doctype html>
 <html lang="ru">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Black Moon Forge Studio CRM</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <main id="unlockScreen" class="login-screen">
-      <form id="unlockForm" class="login-panel">
-        <div class="brand brand-login">
-          <div>
-            <p class="brand-kicker">Рабочее пространство студии</p>
-            <h1>Forge CRM</h1>
-          </div>
-        </div>
-
-        <div class="login-copy">
-          <p class="eyebrow">Рабочее пространство</p>
-          <h2>Добро пожаловать</h2><p class="login-description">Войдите, чтобы продолжить работу с финансами студии.</p>
-        </div>
-
-        <label>
-          Логин
-          <input name="login" type="text" autocomplete="username" placeholder="Ваш логин" autocapitalize="none" spellcheck="false" required />
-        </label>
-        <label>
-          Пароль
-          <input name="password" type="password" autocomplete="current-password" placeholder="Введите пароль" required />
-        </label>
-
-        <label class="remember-row">
-          <input name="remember" type="checkbox" checked />
-          <span>Запомнить это устройство</span>
-        </label>
-
-        <p id="unlockError" class="login-error" role="alert" aria-live="polite"></p>
-        <button class="primary-button" type="submit">Войти</button>
-      </form>
-    </main>
-
-    <script src="sync-config.js"></script>
-    <script src="secure-payload.js"></script>
-    <script src="redesign.js"></script>
-    <script src="interface.js"></script>
-    <script src="auth.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Forge CRM · Финансы студии</title>
+  <script>try { document.documentElement.dataset.theme = localStorage.getItem('bmf-crm-theme-v2') || 'dark'; } catch { document.documentElement.dataset.theme = 'dark'; }</script>
+  <link rel="stylesheet" href="styles.css?v=20261005-2">
+</head>
+<body>
+  <button id="loginTheme" class="login-theme" type="button">Светлая тема</button>
+  <main id="unlockScreen" class="login-screen">
+    <div class="login-intro"><p class="login-studio">BLACK MOON FORGE STUDIO</p><h1>Forge <span>CRM</span></h1><p>Учёт расходов и взносов студии.</p></div>
+    <form id="unlockForm" class="login-panel">
+      <h2>Войти в CRM</h2><p class="login-description">Используйте свой логин и пароль.</p>
+      <label>Логин<input name="login" type="text" autocomplete="username" placeholder="Ваш логин" autocapitalize="none" spellcheck="false" required></label>
+      <label>Пароль<input name="password" type="password" autocomplete="current-password" placeholder="Введите пароль" required></label>
+      <label class="remember-row"><input name="remember" type="checkbox" checked><span>Оставаться в системе</span></label>
+      <p id="unlockError" class="login-error" role="alert" aria-live="polite"></p>
+      <button class="button-primary" type="submit">Войти</button>
+    </form>
+  </main>
+  <script>
+    const loginThemeButton = document.querySelector('#loginTheme');
+    function refreshLoginTheme() { loginThemeButton.textContent = document.documentElement.dataset.theme === 'dark' ? 'Светлая тема' : 'Тёмная тема'; }
+    loginThemeButton.addEventListener('click', () => { const choice = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'; document.documentElement.dataset.theme = choice; localStorage.setItem('bmf-crm-theme-v2', choice); refreshLoginTheme(); });
+    refreshLoginTheme();
+  </script>
+  <script src="sync-config.js"></script>
+  <script src="secure-payload.js"></script>
+  <script src="redesign.js?v=20261005-2"></script>
+  <script src="core-bridge.js?v=20261005-2"></script>
+  <script src="interface.js?v=20261005-2"></script>
+  <script src="auth.js?v=20261005-2"></script>
+</body>
 </html>

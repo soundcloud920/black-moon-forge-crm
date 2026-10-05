@@ -127,10 +127,10 @@ function mountApp(unlocked) {
   document.head.append(style);
 
   document.body.innerHTML = window.BMF_REDESIGN?.html || unlocked.payload.html;
-  if (window.BMF_REDESIGN && !localStorage.getItem("bmf-crm-theme-v1")) {
-    localStorage.setItem("bmf-crm-theme-v1", "light");
+  if (window.BMF_REDESIGN) {
+    localStorage.setItem("bmf-crm-theme-v1", localStorage.getItem("bmf-crm-theme-v2") || "dark");
   }
-  new Function(unlocked.payload.js)();
+  new Function(window.BMF_WRAP_CORE ? window.BMF_WRAP_CORE(unlocked.payload.js) : unlocked.payload.js)();
   window.BMF_SETUP_INTERFACE?.();
 }
 
